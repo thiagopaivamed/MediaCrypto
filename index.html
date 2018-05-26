@@ -1,0 +1,72 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Criptomoedas</title>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+</head>
+
+<body>
+
+  <div class="">
+    <div class="hero is-light">
+      <div class="hero-body">
+        <div class="container">
+          <input type="text" class="input">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="section is-invisible">
+    <div class="hero is-info is-bold">
+      <div class="hero-body">
+        <div class="media">
+          <figure class="media-left">
+            <p class="image is-64x64">
+              <img src="https://bulma.io/images/placeholders/128x128.png">
+            </p>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <p>
+                <strong class="nomeMoeda"></strong>
+                <br>
+                <small class="texto"></small>
+              </p>
+            </div>            
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        Criptomoedas
+      </div>
+    </div>
+  </footer>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+    $(".input").keyup(function () {
+      var input = $(".input").val().toUpperCase();
+      $.get("http://coincap.io/page/" + input, function (data, status) {
+        $(".section").removeClass("is-invisible");
+        $(".nomeMoeda").html(data.display_name);
+        $(".texto").html("A moeda " + data.alt_name + " (" + data.id + ")" + " possui " + data.volume +
+          " unidades. O seu preço é " + data.price_usd + " dólares e atualmente está na posição " +
+          data.rank + ".");
+      });
+
+    });
+  </script>
+</body>
+
+</html>
